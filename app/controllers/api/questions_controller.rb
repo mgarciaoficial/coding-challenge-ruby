@@ -6,7 +6,7 @@ class Api::QuestionsController < Api::ApplicationController
   def index
     render json: {
       data: {
-        questions: @questions.as_json
+        questions: Questions::JsonPresenter.call(@questions)
       }
     }, status: :ok
   end
