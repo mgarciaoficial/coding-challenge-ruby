@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module Questions
-  class JsonPresenter < ApplicationPresenter
+  class JsonSerializer < ApplicationSerializer
     attr_reader :serializable
 
     def initialize(serializable)
       @serializable = serializable
     end
 
-    def call
+    def serialize
       serializable.as_json(
         only: %i[id title created_at updated_at],
         include: {

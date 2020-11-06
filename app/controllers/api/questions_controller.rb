@@ -6,7 +6,7 @@ class Api::QuestionsController < Api::ApplicationController
   def index
     render json: {
       data: {
-        questions: Questions::JsonPresenter.call(@questions)
+        questions: Questions::JsonSerializer.serialize(@questions)
       }
     }, status: :ok
   end
