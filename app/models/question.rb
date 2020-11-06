@@ -4,5 +4,5 @@ class Question < ApplicationRecord
 
   validates_presence_of :title
 
-  scope :shareable, -> { where(share: true) }
+  scope :shared, -> { where(share: true) }
 end

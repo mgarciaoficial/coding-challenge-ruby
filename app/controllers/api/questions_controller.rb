@@ -14,6 +14,6 @@ class Api::QuestionsController < Api::ApplicationController
   private
 
   def init_questions
-    @questions = Question.shareable
+    @questions = Question.shared.where(params.permit(:title, :user_id))
   end
 end
