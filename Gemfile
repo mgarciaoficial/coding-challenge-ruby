@@ -54,6 +54,7 @@ end
 
 group :test do
   gem 'json-schema', '~> 2.8.1'
+  gem 'timecop', '~> 0.9.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

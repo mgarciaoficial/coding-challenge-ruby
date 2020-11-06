@@ -7,13 +7,20 @@ class Api::ApplicationController < ActionController::API
 
   protected
 
+  # We need tenant record to track req count
+  # Try to find it, and rescue from not found error and raise proper unauth error
   def authenticate_tenant
     api_key = request.headers['X-API-KEY']
-    raise UnauthError, 'Invalid key' unless Tenant.exists?(api_key: api_key)
+    @current_tenant = Tenant.find_by! api_key: api_key
+  rescue ActiveRecord::RecordNotFound
+    raise UnauthError, 'Invalid key'
   end
 
   def track_request
-    # track request logic goes in here
+    # Lets make sure we keep a real track of requests per tenant.
+    @current_tenant.with_lock do
+      @current_tenant.update req_count: @current_tenant.req_count + 1
+    end
   end
 
   private
@@ -21,5 +28,4 @@ class Api::ApplicationController < ActionController::API
   def render_unauth(exception)
     render json: { message: exception.message }, status: :unauthorized
   end
-
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_14_195258) do
+ActiveRecord::Schema.define(version: 2020_11_06_022854) do
 
   create_table "answers", force: :cascade do |t|
     t.string "body", null: false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_10_14_195258) do
     t.string "api_key", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "req_count", default: 0
   end
 
   create_table "users", force: :cascade do |t|
