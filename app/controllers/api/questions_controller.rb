@@ -15,5 +15,6 @@ class Api::QuestionsController < Api::ApplicationController
 
   def init_questions
     @questions = Question.shared.where(params.permit(:title, :user_id))
+                         .includes(:user, answers: :user)
   end
 end
